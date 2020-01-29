@@ -32,9 +32,9 @@ namespace Inventory_Project
                 text += $"Name: {product.name}\n" +
                         $"Price: {product.price}\n";
                 if (product is CDProduct)
-                    text += "Type: CD\n\n";
+                    text += $"Size: {((CDProduct)product).numOfTracks}\nType: CD\n\n";
                 else
-                    text += "Type: Book\n\n";
+                    text += $"Size: {((BookProduct)product).numOfPages}\nType: Book\n\n";
             }
 
             return text;

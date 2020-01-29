@@ -32,7 +32,8 @@ namespace Inventory_Project
             {
                 return new BookProduct(name, price, size);
             }
-            return null;
+            else
+                throw new TypeAccessException($"Invalid type! ('{type}')");
         }
 
         public List<Product> loadProducts()

@@ -26,6 +26,7 @@ namespace Inventory_Project
                 }
                 catch (KeyNotFoundException e) { ManageEx(e.Message); }
                 catch (ArgumentException e) { ManageEx(e.Message); }
+                catch (TypeAccessException e) { ManageEx(e.Message); }
             }
         }
 
@@ -60,7 +61,7 @@ namespace Inventory_Project
 
                 for (int i = 0; i < values.Length; i++)
                 {
-                    Console.WriteLine($"\nEnter the product {props[i]}:");
+                    Console.WriteLine($"Enter the product {props[i]}:");
                     if (i == 0)
                     {
                         string temp = Console.ReadLine();
