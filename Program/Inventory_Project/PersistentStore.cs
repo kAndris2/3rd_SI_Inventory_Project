@@ -6,7 +6,10 @@ namespace Inventory_Project
 {
     class PersistentStore : Store
     {
-        private List<Product> products { get; set; } = new List<Product>();
+        public PersistentStore()
+        {
+            products = loadProducts();
+        }
 
         public override void storeProduct(Product product)
         {

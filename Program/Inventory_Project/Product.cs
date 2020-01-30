@@ -9,5 +9,6 @@ namespace Inventory_Project
         //Private volt!
         public string name { get; set; }
         public int price { get; set; }
+        public string type { get; set; }
     }
 }

@@ -9,14 +9,30 @@ namespace Inventory_Project
 
     public abstract class Store : StorageCapable
     {
+        public const string FILENAME = "test.xml";
+        public List<Product> products { get; set; } = new List<Product>();
+
         private void saveToXml(Product product)
         {
-            XmlSerializer writer = new XmlSerializer(typeof(Product));
+            XmlSerializer writer = new XmlSerializer(product.GetType());
 
-            using (TextWriter writerfinal = new StreamWriter("test.xml"))
+            using (TextWriter writerfinal = new StreamWriter(FILENAME))
             {
                 writer.Serialize(writerfinal, product);
             }
+        }
+
+        public List<Product> loadProducts()
+        {
+            XmlSerializer reader = new XmlSerializer(typeof(List<Product>));
+            List<Product> i;
+
+            using (FileStream readfile = File.OpenRead(FILENAME))
+            {
+                i = (List<Product>)reader.Deserialize(readfile);
+            }
+
+            return i;
         }
 
         public abstract void storeProduct(Product product);
@@ -36,14 +52,9 @@ namespace Inventory_Project
                 throw new TypeAccessException($"Invalid type! ('{type}')");
         }
 
-        public List<Product> loadProducts()
-        {
-            return null;
-        }
-
         public void store(Product product)
         {
-            //saveToXml(product);
+            saveToXml(product);
             storeProduct(product);
         }
 

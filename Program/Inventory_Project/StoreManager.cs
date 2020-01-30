@@ -30,11 +30,12 @@ namespace Inventory_Project
             foreach (Product product in IStorage.getAllProduct())
             {
                 text += $"Name: {product.name}\n" +
-                        $"Price: {product.price}\n";
+                        $"Price: {product.price}\n" +
+                        $"Type: {product.type}\n";
                 if (product is CDProduct)
-                    text += $"Size: {((CDProduct)product).numOfTracks}\nType: CD\n\n";
+                    text += $"Size: {((CDProduct)product).numOfTracks}\n\n";
                 else
-                    text += $"Size: {((BookProduct)product).numOfPages}\nType: Book\n\n";
+                    text += $"Size: {((BookProduct)product).numOfPages}\n\n";
             }
 
             return text;

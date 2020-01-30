@@ -15,6 +15,7 @@ namespace Inventory_Project
             this.name = name;
             this.price = price;
             numOfPages = pages;
+            type = "Book";
         }
     }
 }
