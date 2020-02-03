@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Inventory_Project
 {
@@ -8,7 +9,8 @@ namespace Inventory_Project
     {
         public PersistentStore()
         {
-            products = loadProducts();
+            if (File.Exists(FILENAME))
+                products = loadProducts();
         }
 
         public override void storeProduct(Product product)
