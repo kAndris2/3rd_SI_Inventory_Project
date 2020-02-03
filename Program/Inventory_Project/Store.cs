@@ -9,22 +9,23 @@ namespace Inventory_Project
 
     public abstract class Store : StorageCapable
     {
+        private static Type[] EXTRA_TYPES = new Type[] { typeof(CDProduct), typeof(BookProduct) };
         public const string FILENAME = "test.xml";
         public List<Product> products { get; set; } = new List<Product>();
 
         private void saveToXml(Product product)
         {
-            XmlSerializer writer = new XmlSerializer(product.GetType());
+            XmlSerializer writer = new XmlSerializer(typeof(List<Product>), EXTRA_TYPES);
 
             using (TextWriter writerfinal = new StreamWriter(FILENAME))
             {
-                writer.Serialize(writerfinal, product);
+                writer.Serialize(writerfinal, products);
             }
         }
 
         public List<Product> loadProducts()
         {
-            XmlSerializer reader = new XmlSerializer(typeof(List<Product>));
+            XmlSerializer reader = new XmlSerializer(typeof(List<Product>), EXTRA_TYPES);
             List<Product> i;
 
             using (FileStream readfile = File.OpenRead(FILENAME))
@@ -54,8 +55,8 @@ namespace Inventory_Project
 
         public void store(Product product)
         {
-            saveToXml(product);
             storeProduct(product);
+            saveToXml(product);
         }
 
         public void storeCDProduct(string name, int price, int tracks)
