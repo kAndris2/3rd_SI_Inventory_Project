@@ -7,10 +7,17 @@ namespace Inventory_Project
 {
     class PersistentStore : Store
     {
-        public PersistentStore()
+        public PersistentStore(string ext)
         {
-            if (File.Exists(FILENAME))
-                products = loadProducts();
+            extension = ext;
+            if (File.Exists(FILENAME + "." + ext))
+            {
+                if (ext == "xml")
+                    products = loadProductsFromXml();
+
+                else if (ext == "csv")
+                    products = loadProductsFromCsv();
+            }
         }
 
         public override void storeProduct(Product product)

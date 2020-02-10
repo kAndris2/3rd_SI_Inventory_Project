@@ -8,8 +8,10 @@ namespace Inventory_Project
         static void Main(string[] args)
         {
             StoreManager sman = new StoreManager();
-            sman.addStorage(new PersistentStore());
-
+            Console.WriteLine("Which database you want to use? (xml/csv)");
+            sman.addStorage(new PersistentStore(Console.ReadLine().ToLower()));
+            Console.Clear();
+            
             while (true)
             {
                 Menu();
